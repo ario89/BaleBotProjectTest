@@ -1,0 +1,2 @@
+from bale import Message
+
