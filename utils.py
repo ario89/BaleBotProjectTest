@@ -1,5 +1,3 @@
-import csv
-import re
 from bale import MenuKeyboardMarkup, MenuKeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
 
 def menuCompentents(category:str, varList):
@@ -10,6 +8,3 @@ def menuCompentents(category:str, varList):
             markup.add(MenuKeyboardButton(var.displayName), row=var.row)
         
     return markup
-
-
-    
