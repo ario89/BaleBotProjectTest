@@ -47,7 +47,7 @@ async def on_callback(callback: CallbackQuery):
         await toolbox.main(callback.message)
         
     elif data == "back:ai":
-        await AI.main(callback.message)
+        await ai.main(callback.message)
     
     if data.startswith("esmfamil:"):
         clean = data.removeprefix("esmfamil:")
