@@ -1,11 +1,14 @@
-from bale import Message, InlineKeyboardButton, InlineKeyboardMarkup
+from bale import Message
 from Categories.Toolbox.toolbox import backButton, toolboxCommand
+from utils import inlineComponents
 import translators as ts
 
 @toolboxCommand("translate","💫 Translate", 10)
 async def translate(message:Message, query:Message = False, lang:str=None, *args):
     if not lang and not query:
-        return await message.reply("💬 *Choose Lang:* ", components=inlineComponents())
+        components = inlineComponents({"انگلیسی به فارسی": "fa", 
+                                        "فارسی به انگلیسی": "en"})
+        return await message.reply("💬 *Choose Lang:* ", components=components)
     
     toLang = lang
     fromLang = "enfa".replace(lang, '')
@@ -15,10 +18,3 @@ async def translate(message:Message, query:Message = False, lang:str=None, *args
     except: 
         await query.reply("❌ Error", components=await backButton())
     await query.reply(f"✅ Translated Text From *{fromLang}* To *{toLang}*:\n *{result}*", components=await backButton())
-    
-def inlineComponents():
-    markup = InlineKeyboardMarkup()
-    markup.add(InlineKeyboardButton("فارسی به انگلیسی", callback_data="translate:en"))
-    markup.add(InlineKeyboardButton("انگلیسی به فارسی", callback_data="translate:fa"))
-    
-    return markup

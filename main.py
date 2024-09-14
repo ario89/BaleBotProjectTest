@@ -50,6 +50,10 @@ async def on_callback(callback: CallbackQuery):
         clean = data.removeprefix("translate:")
         await callback.message.reply("Enter Query: ")
         await queryInput(callback.message, Variable.getObjectByName("translate").displayName, clean)
+    if data.startswith("morse:"):
+        clean = data.removeprefix("morse:")
+        await callback.message.reply("Enter Query: ")
+        await queryInput(callback.message, Variable.getObjectByName("morse").displayName, clean)
         
 async def queryInput(message:Message, content:str, *args):
     options_list = [var.displayName for var in Variable.variableList()]
