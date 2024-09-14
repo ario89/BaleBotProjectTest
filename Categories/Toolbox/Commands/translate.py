@@ -10,11 +10,13 @@ async def translate(message:Message, query:Message = False, lang:str=None, *args
                                         "فارسی به انگلیسی": "translate:en"})
         return await message.reply("💬 *Choose Lang:* ", components=components)
     
+    msg = await query.reply("💫 Translating...")
+    
     toLang = lang
     fromLang = "enfa".replace(lang, '')
     
     try:
         result = ts.translate_text(query.content, from_language=fromLang ,to_language=toLang)
+        return await msg.edit(f"✅ Translated Text From *{fromLang}* To *{toLang}*:\n *{result}*", components=await backButton())
     except: 
-        await query.reply("❌ Error", components=await backButton())
-    await query.reply(f"✅ Translated Text From *{fromLang}* To *{toLang}*:\n *{result}*", components=await backButton())
+        return await msg.edit("❌ Error", components=await backButton())
