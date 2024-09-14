@@ -1,4 +1,5 @@
 from bale import Message
+import requests
 from Categories.Toolbox.toolbox import backButton, toolboxCommand
 
 @toolboxCommand("cardInfo", "💳 Get Card Info", 10)
