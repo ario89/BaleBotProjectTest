@@ -6,8 +6,8 @@ import translators as ts
 @toolboxCommand("translate","💫 Translate", 10)
 async def translate(message:Message, query:Message = False, lang:str=None, *args):
     if not lang and not query:
-        components = inlineComponents({"انگلیسی به فارسی": "fa", 
-                                        "فارسی به انگلیسی": "en"})
+        components = inlineComponents({"انگلیسی به فارسی": "translate:fa", 
+                                        "فارسی به انگلیسی": "translate:en"})
         return await message.reply("💬 *Choose Lang:* ", components=components)
     
     toLang = lang
