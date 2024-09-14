@@ -1,7 +1,6 @@
 from bale import MenuKeyboardMarkup, MenuKeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
 
 def menuCompentents(category:str, varList) -> MenuKeyboardMarkup:
-    print([var.name for var in varList])
     markup = MenuKeyboardMarkup()
     
     for var in varList:
