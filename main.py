@@ -6,7 +6,7 @@ from Categories.Toolbox.Commands import esmFamilCheat
 from os import getenv
 import asyncio
 import Categories.Toolbox.toolbox as toolbox
-import Categories.AI.AI as AI
+import Categories.AI.AI as ai
 import Categories.downloader as downloader
 
 load_dotenv()
@@ -15,12 +15,13 @@ load_dotenv()
 client = Bot(getenv("TOKEN"))
 
 TOOLBOX = Variable("toolbox", "⚙️ ToolBox ⚙️", "main", toolbox.main)
-AI = Variable("ai", "🤖 AI 🤖", "main", AI.main)
+AI = Variable("ai", "🤖 AI 🤖", "main", ai.main)
 DOWNLOADER = Variable("downloader", "📩 Downloaders", "main",downloader.main)
 # Constants
 WELCOME_TEXT = """Hi {name}, Welcome to Ario's test bot!"""
 
 toolbox.loadToolbox()
+ai.loadAI()
 
 @client.event
 async def on_ready():

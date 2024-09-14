@@ -1,10 +1,12 @@
 from bale import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from functools import wraps
 from Variable import Variable
+from utils import menuCompentents
 import os,importlib
 
 async def main(message: Message, *args):
-    message.reply("Soon...")
+    components = menuCompentents("ai", Variable.variableList())
+    await message.reply("Soon...", components=components)
     
 def AICommand(name: str, display_name: str, row: int, disabled=False):
     def decorator(func):
@@ -14,7 +16,7 @@ def AICommand(name: str, display_name: str, row: int, disabled=False):
             return result
         if not disabled: 
             if not name in [var.name for var in Variable.variableList()]: 
-                Variable(name, display_name, "AI", func, row)
+                Variable(name, display_name, "ai", func, row)
         return wrapper
     return decorator
 
