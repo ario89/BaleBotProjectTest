@@ -26,7 +26,7 @@ async def tts(message:Message, query:Message=False, *args):
             audio_file = InputFile(f, file_name="Audio.mp3")
         
         await msg.edit("🌐 Uploading...")
-        await query.reply_document(document=audio_file, components=buttons)
+        await query.reply_document(document=audio_file,caption="✅ Generated",components=buttons)
         return await msg.delete()
     except Exception as e:
         await msg.edit("❌ Error", components=backButton())
