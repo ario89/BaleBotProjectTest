@@ -6,7 +6,7 @@ from Categories.Toolbox.Commands import esmFamilCheat
 from os import getenv
 import asyncio
 import Categories.Toolbox.toolbox as toolbox
-import Categories.AI as AI
+import Categories.AI.AI as AI
 import Categories.downloader as downloader
 
 load_dotenv()
@@ -43,6 +43,9 @@ async def on_callback(callback: CallbackQuery):
     data = callback.data
     if data == "back:toolbox":
         await toolbox.main(callback.message)
+        
+    elif data == "back:ai":
+        await AI.main(callback.message)
     
     if data.startswith("esmfamil:"):
         clean = data.removeprefix("esmfamil:")
