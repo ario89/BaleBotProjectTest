@@ -8,7 +8,7 @@ async def ChatGPT(message:Message, query:Message=False, *args):
         await message.reply("❓ What Do You Want Help With? ")
         return "query"
     
-    msg = await query.reply("🪄 Typing...")
+    msg = await message.chat.send("🪄 Typing...")
     
     try:
         result = api.Ai_chat_GPT(query.content)

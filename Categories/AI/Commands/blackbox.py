@@ -8,7 +8,7 @@ async def blackbox(message:Message, query:Message=False, *args):
         await message.reply("❓ What Do You Want Help With? ")
         return "query"
     
-    msg = await query.reply("🪄 Typing...")
+    msg = await message.chat.send("🪄 Typing...")
     back = await backButton()
     buttons = back.add(InlineKeyboardButton("Reuse BlackBox", callback_data="ai:blackbox"))
     

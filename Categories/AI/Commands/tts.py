@@ -11,7 +11,7 @@ async def tts(message:Message, query:Message=False, *args):
         await message.reply("❓ Enter Text To Convert ")
         return "query"
     
-    msg = await query.reply("🕹️ Generating...")
+    msg = await message.chat.send("🕹️ Generating...")
     back = await backButton()
     buttons = back.add(InlineKeyboardButton("Reuse TTS", callback_data="ai:tts"))
     
