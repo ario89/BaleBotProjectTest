@@ -2,6 +2,9 @@ from bale import Message, InlineKeyboardButton
 from Categories.AI.AI import AICommand, backButton
 from codern import api
 
+ERORR_RESULT = """خروجی ناقص امکان وجود خطا در سرور !
+لطفا در دقایقی دیگر تلاش کنید"""
+
 @AICommand("blackbox", "📦 BlackBox AI", 1)
 async def blackbox(message:Message, query:Message=False, *args):
     if not query:
@@ -14,6 +17,8 @@ async def blackbox(message:Message, query:Message=False, *args):
     
     try:
         result:str = api.Ai_black_box(query.content)
+        if result == ERORR_RESULT:
+            raise Exception(result)
         await msg.edit(result.removeprefix("v=undefined"), components=buttons)
     except Exception as e:
         await msg.edit("❌ Error")
