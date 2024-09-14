@@ -6,7 +6,7 @@ import os,importlib
 
 async def main(message: Message, *args):
     components = menuCompentents("ai", Variable.variableList())
-    await message.reply("Soon...", components=components)
+    await message.reply("🤖 AI Category\nSelect From Menu Below...", components=components)
     
 def AICommand(name: str, display_name: str, row: int, disabled=False):
     def decorator(func):
