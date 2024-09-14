@@ -1,3 +1,5 @@
+from typing import Self
+
 class Variable():
     counter: int = 0
     varList = []
@@ -17,18 +19,24 @@ class Variable():
     
     @classmethod
     def variableList(cls):
-        return [var for var in cls.varList]
+        return cls.varList
     
     @classmethod
-    def getObj(cls, name: str):
+    def getObjectByDisplayName(cls, name: str) -> Self:
         for obj in cls.varList:
             if(name == obj.displayName):
                 return obj
         return None
+    @classmethod
+    def getObjectByName(cls, name:str) -> Self:
+        for obj in cls.varList:
+            if(name == obj.name):
+                return obj
+        return None
             
-    def execute(self, message, query = False):
-        return self.execFunc(message, query)
+    def execute(self, message, query = False, *args):
+        return self.execFunc(message, query, *args)
     
-    def isCategory(self):
+    def isCategory(self) -> bool:
         return self.category == "main"
     
