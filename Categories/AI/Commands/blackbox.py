@@ -1,5 +1,6 @@
 from bale import Message
 from Categories.AI.AI import AICommand, backButton
+from utils import inlineComponents
 from codern import api
 
 @AICommand("blackbox", "📦 BlackBox AI", 1)
@@ -9,6 +10,8 @@ async def blackbox(message:Message, query:Message=False, *args):
         return "query"
     
     msg = await query.reply("🪄 Typing...")
+    continueChat = inlineComponents({"Reuse BlackBox": "ai:blackbox"})
+    buttons = continueChat.add(backButton())    
     
     try:
         result:str = api.Ai_black_box(query.content)

@@ -1,4 +1,5 @@
 from bale import Message
+from utils import inlineComponents
 from Categories.AI.AI import AICommand, backButton
 from codern import api
 
@@ -9,10 +10,12 @@ async def ChatGPT(message:Message, query:Message=False, *args):
         return "query"
     
     msg = await query.reply("🪄 Typing...")
+    continueChat = inlineComponents({"Reuse ChatGPT": "ai:chatgpt"})
+    buttons = continueChat.add(backButton())    
     
     try:
         result = api.Ai_chat_GPT(query.content)
-        await msg.edit(result)
+        await msg.edit(result, components=buttons)
     except Exception as e:
-        await msg.edit("❌ Error")
+        await msg.edit("❌ Error", components=backButton())
         print(e)

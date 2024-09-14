@@ -3,6 +3,7 @@ from Variable import Variable
 from utils import menuCompentents
 from bale import Bot, CallbackQuery, Message
 from Categories.Toolbox.Commands import esmFamilCheat
+from Categories.AI.Commands import chatgpt,blackbox,tts
 from os import getenv
 import asyncio
 import Categories.Toolbox.toolbox as toolbox
@@ -61,6 +62,16 @@ async def on_callback(callback: CallbackQuery):
         clean = data.removeprefix("morse:")
         await callback.message.reply("Enter Query: ")
         await queryInput(callback.message, Variable.getObjectByName("morse").displayName, clean)
+        
+    if data.startswith("ai:"):
+        clean = data.removeprefix("ai:")
+        if clean == "chatgpt":
+            chatgpt.ChatGPT(callback.message)
+        if clean == "blackbox":
+            blackbox.blackbox(callback.message)
+        if clean == "tts":
+            tts.tts(callback.message)
+            
         
 async def queryInput(message:Message, content:str, *args):
     options_list = [var.displayName for var in Variable.variableList()]
