@@ -67,12 +67,15 @@ async def on_callback(callback: CallbackQuery):
         clean = data.removeprefix("ai:")
         if clean == "chatgpt":
             await chatgpt.ChatGPT(callback.message)
-        if clean == "blackbox":
+            await queryInput(callback.message, Variable.getObjectByName('chatgpt').displayName)
+        elif clean == "blackbox":
             await blackbox.blackbox(callback.message)
-        if clean == "tts":
+            await queryInput(callback.message, Variable.getObjectByName('blackbox').displayName)
+        elif clean == "tts":
             await tts.tts(callback.message)
+            await queryInput(callback.message, Variable.getObjectByName('tts').displayName)
             
-        
+
 async def queryInput(message:Message, content:str, *args):
     options_list = [var.displayName for var in Variable.variableList()]
     def answer_checker(m: Message):
