@@ -78,7 +78,7 @@ async def on_callback(callback: CallbackQuery):
 async def queryInput(message:Message, content:str, *args):
     options_list = [var.displayName for var in Variable.variableList()]
     def answer_checker(m: Message):
-            return message.chat_id == m.chat_id and bool(message.text)
+            return message.chat_id == m.chat_id and (bool(message.text) or bool(message.caption))
     try:
         answer_obj: Message = await client.wait_for('message', check=answer_checker, timeout=30.0)
     except asyncio.TimeoutError:
