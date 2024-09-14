@@ -30,7 +30,7 @@ def loadAI(folder_path="./Categories/AI/Commands"):
             module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(module)
 
-def backButton() -> InlineKeyboardMarkup:
+async def backButton() -> InlineKeyboardMarkup:
     markup = InlineKeyboardMarkup()
     markup.add(InlineKeyboardButton(text="🔙 Back To AIs 🔙", callback_data="back:AI"))
     return markup

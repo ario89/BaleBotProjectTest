@@ -66,11 +66,11 @@ async def on_callback(callback: CallbackQuery):
     if data.startswith("ai:"):
         clean = data.removeprefix("ai:")
         if clean == "chatgpt":
-            chatgpt.ChatGPT(callback.message)
+            await chatgpt.ChatGPT(callback.message)
         if clean == "blackbox":
-            blackbox.blackbox(callback.message)
+            await blackbox.blackbox(callback.message)
         if clean == "tts":
-            tts.tts(callback.message)
+            await tts.tts(callback.message)
             
         
 async def queryInput(message:Message, content:str, *args):

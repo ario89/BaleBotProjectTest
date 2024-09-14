@@ -1,6 +1,5 @@
-from bale import Message, InputFile
+from bale import Message, InputFile, InlineKeyboardButton
 from Categories.AI.AI import AICommand, backButton
-from utils import inlineComponents
 from codern import api
 import requests
 
@@ -13,8 +12,8 @@ async def tts(message:Message, query:Message=False, *args):
         return "query"
     
     msg = await query.reply("🕹️ Generating...")
-    continueChat = inlineComponents({"Reuse TTS": "ai:tts"})
-    buttons = continueChat.add(backButton())    
+    back = await backButton()
+    buttons = back.add(InlineKeyboardButton("Reuse TTS", callback_data="ai:tts"))
     
     try:
         result:str = api.create_voice(query.content)
