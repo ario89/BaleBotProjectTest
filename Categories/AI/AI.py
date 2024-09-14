@@ -32,5 +32,5 @@ def loadAI(folder_path="./Categories/AI/Commands"):
 
 async def backButton() -> InlineKeyboardMarkup:
     markup = InlineKeyboardMarkup()
-    markup.add(InlineKeyboardButton(text="🔙 Back To AIs 🔙", callback_data="back:AI"))
+    markup.add(InlineKeyboardButton(text="🔙 Back To AIs 🔙", callback_data="back:ai"))
     return markup
