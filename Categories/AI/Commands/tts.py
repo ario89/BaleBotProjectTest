@@ -8,7 +8,7 @@ FILE_URL = 'Assets/temp/audio.mp3'
 @AICommand("tts", "🗣️ Text-To-Speach", 2)
 async def tts(message:Message, query:Message=False, *args):
     if not query:
-        await message.reply("❓ Enter Text To Convert ")
+        await message.reply("❓ Enter Text To Convert (Persian): ")
         return "query"
     
     msg = await message.chat.send("🕹️ Generating...")
