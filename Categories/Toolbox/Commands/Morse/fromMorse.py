@@ -11,10 +11,9 @@ MORSE_CODE_DICT = {
 
 async def fromMorse(query:Message, *args):
     if len(query.content) >= 4096 or len(query.content) < 1:
-        return await query.reply("❌ Invalid Length", components=back)
+        return await query.reply("❌ Invalid Length", components=await backButton())
     
     msg = await query.reply("🔃 Decoding...")
-    
     back = await backButton()
 
     result = decrypt(query.content)
