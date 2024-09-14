@@ -20,7 +20,9 @@ def toolboxCommand(name: str, display_name: str, row: int, disabled=False):
         async def wrapper(*args, **kwargs):
             result = await func(*args, **kwargs)
             return result
-        if not disabled: Variable(name, display_name, "toolbox", func, row)
+        if not disabled: 
+            if not name in [var.name for var in Variable.variableList()]: 
+                Variable(name, display_name, "toolbox", func, row)
         return wrapper
     return decorator
 

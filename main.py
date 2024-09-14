@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 from Variable import Variable
 from utils import menuCompentents
 from bale import Bot, CallbackQuery, Message
-from Categories.Toolbox.Commands import esmFamilCheat, translate
+from Categories.Toolbox.Commands import esmFamilCheat
 from os import getenv
 import asyncio
 import Categories.Toolbox.toolbox as toolbox
@@ -43,13 +43,16 @@ async def on_callback(callback: CallbackQuery):
     data = callback.data
     if data == "back:toolbox":
         await toolbox.main(callback.message)
+    
     if data.startswith("esmfamil:"):
         clean = data.removeprefix("esmfamil:")
         await esmFamilCheat.esmFamilCheat(callback.message, clean)
+        
     if data.startswith("translate:"):
         clean = data.removeprefix("translate:")
         await callback.message.reply("Enter Query: ")
         await queryInput(callback.message, Variable.getObjectByName("translate").displayName, clean)
+        
     if data.startswith("morse:"):
         clean = data.removeprefix("morse:")
         await callback.message.reply("Enter Query: ")
