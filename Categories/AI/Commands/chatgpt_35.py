@@ -26,5 +26,5 @@ async def ChatGPT3(message:Message, query:Message=False, *args):
         buttons = back.add(InlineKeyboardButton("Reuse GPT 3.5", callback_data="ai:chatgpt3.5"))
         await msg.edit(result.choices[0].message.content, components=buttons)
     except Exception as e:
-        await msg.edit("❌ Error", components=await backButton())
+        await msg.edit("❌ Error", components=buttons)
         print(e)

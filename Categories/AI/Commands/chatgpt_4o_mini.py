@@ -25,5 +25,5 @@ async def ChatGPT4(message:Message, query:Message=False, *args):
         buttons = back.add(InlineKeyboardButton("Reuse GPT-4o", callback_data="ai:chatgpt4o"))
         await msg.edit(result.choices[0].message.content, components=buttons)
     except Exception as e:
-        await msg.edit("❌ Error", components=await backButton())
+        await msg.edit("❌ Error", components=buttons)
         print(e)
