@@ -11,7 +11,7 @@ client = OpenAI(
     base_url="https://api.chatanywhere.tech/v1"
 )
 
-@AICommand("chatgpt-3.5", "🤖 ChatGPT 3.5-Turbo", 0)
+@AICommand("chatgpt-3.5", "🤖 ChatGPT 3.5-Turbo", 2)
 async def ChatGPT3(message:Message, query:Message=False, *args):
     if not query:
         await message.reply("❓ What Do You Want Help With? ")

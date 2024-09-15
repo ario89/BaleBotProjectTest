@@ -5,7 +5,7 @@ from codern import api
 ERORR_RESULT = """خروجی ناقص امکان وجود خطا در سرور !
 لطفا در دقایقی دیگر تلاش کنید"""
 
-@AICommand("blackbox", "📦 BlackBox AI", 1)
+@AICommand("blackbox", "📦 BlackBox AI", 3)
 async def blackbox(message:Message, query:Message=False, *args):
     if not query:
         await message.reply("❓ What Do You Want Help With? ")
