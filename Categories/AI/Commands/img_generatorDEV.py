@@ -6,9 +6,9 @@ import requests
 
 load_dotenv()
 
-OUTPUT_PATH = "Assets/temp/generated_img.png"
+OUTPUT_PATH = "Assets/temp/generated_imgDEV.png"
 
-@AICommand("imgGenerator", "🖼️ Image Generator", 1)
+@AICommand("imgGenerator-dev", "🖼️ Image Generator v2", 1)
 async def imageGenerator(message:Message, query:Message=False, *args):
     if not query:
         await message.reply("Enter Query: ")
@@ -17,7 +17,7 @@ async def imageGenerator(message:Message, query:Message=False, *args):
     msg = await query.reply("🔃 Generating\n_This Might Take a While..._")
     
     back = await backButton()
-    buttons = back.add(InlineKeyboardButton("Reuse Generator", callback_data="ai:img"))
+    buttons = back.add(InlineKeyboardButton("Reuse Generator", callback_data="ai:img-DEV"))
     try:
         await generateImage(query.content, OUTPUT_PATH)
     

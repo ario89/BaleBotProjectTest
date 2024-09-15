@@ -4,7 +4,7 @@ from Variable import Variable
 from utils import menuCompentents
 from bale import Bot, CallbackQuery, Message
 from Categories.Toolbox.Commands import esmFamilCheat
-from Categories.AI.Commands import chatgpt_35,chatgpt_4o_mini,blackbox,img_generator
+from Categories.AI.Commands import chatgpt_35,chatgpt_4o_mini,blackbox,img_generatorDEV, img_generatorSCHNELL
 from os import getenv
 import asyncio
 import Categories.Toolbox.toolbox as toolbox
@@ -90,9 +90,12 @@ async def on_callback(callback: CallbackQuery):
         elif clean == "blackbox":
             await blackbox.blackbox(callback.message)
             return await queryInput(callback.message, Variable.getObjectByName('blackbox').displayName)
-        elif clean == "img":
-            await img_generator.imageGenerator(callback.message)
-            return await queryInput(callback.message, Variable.getObjectByName('imgGenerator').displayName)
+        elif clean == "img-DEV":
+            await img_generatorDEV.imageGenerator(callback.message)
+            return await queryInput(callback.message, Variable.getObjectByName('imgGenerator-dev').displayName)
+        elif clean == "img-SCHNELL":
+            await img_generatorSCHNELL.imageGenerator(callback.message)
+            return await queryInput(callback.message, Variable.getObjectByName('imgGenerator-schnell').displayName)
         
     if data.startswith("extract:"):
         clean = data.removeprefix("extract:")
