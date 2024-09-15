@@ -1,7 +1,10 @@
 from bale import Message, InlineKeyboardButton
 from Categories.AI.AI import AICommand, backButton
 from openai import OpenAI
+from dotenv import load_dotenv
 from os import getenv
+
+load_dotenv()
 
 client = OpenAI(
     api_key=getenv("OPENAI_TOKEN"),
