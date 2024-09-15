@@ -3,3 +3,4 @@ __pycache__
 .venv
 /test.py
 Assets/temp/audio.mp3
+Assets/temp/temp.png

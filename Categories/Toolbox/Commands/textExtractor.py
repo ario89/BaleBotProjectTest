@@ -4,7 +4,6 @@ import aiohttp
 
 @toolboxCommand("textExtractor", "💬 Extract Text From Image",10, True)
 async def textExtractor(message: Message, query: Message = None, *args):
-    return await message.reply("⚠️ *This Feature Is W.I.P*", components=await backButton())
     if not query:
         await message.reply("Send Image: ")
         return "query"

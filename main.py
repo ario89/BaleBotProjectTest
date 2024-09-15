@@ -74,6 +74,10 @@ async def on_callback(callback: CallbackQuery):
         clean = data.removeprefix("morse:")
         await callback.message.reply("Enter Query: ")
         await queryInput(callback.message, Variable.getObjectByName("morse").displayName, clean)
+    if data.startswith("ocr:"):
+        clean = data.removeprefix("ocr:")
+        await callback.message.reply("Send Image:")
+        await queryInput(callback.message, Variable.getObjectByName("ocr").displayName, clean)
         
     if data.startswith("ai:"):
         clean = data.removeprefix("ai:")
@@ -86,6 +90,7 @@ async def on_callback(callback: CallbackQuery):
         elif clean == "blackbox":
             await blackbox.blackbox(callback.message)
             return await queryInput(callback.message, Variable.getObjectByName('blackbox').displayName)
+        
     if data.startswith("extract:"):
         clean = data.removeprefix("extract:")
         if clean == "tts":
