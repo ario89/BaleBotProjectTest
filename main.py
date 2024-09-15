@@ -17,9 +17,9 @@ load_dotenv()
 # Initialize Bot
 client = Bot(getenv("TOKEN"))
 
-TOOLBOX = Variable("toolbox", "⚙️ ToolBox ⚙️", "main", toolbox.main)
-AI = Variable("ai", "🤖 AI 🤖", "main", ai.main)
-EXTRACTORS = Variable("extractors", "📨 Extractors", "main", extract.main)
+TOOLBOX = Variable("toolbox", "⚙️ ToolBox ⚙️", "main", toolbox.main, 1)
+AI = Variable("ai", "🤖 AI 🤖", "main", ai.main, 2)
+EXTRACTORS = Variable("extractors", "📨 Extractors", "main", extract.main, 2)
 # DOWNLOADER = Variable("downloader", "📩 Downloaders", "main",downloader.main)
 # Constants
 WELCOME_TEXT = """Hi {name}, Welcome to Ario's test bot!"""

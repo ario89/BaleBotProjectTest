@@ -6,7 +6,7 @@ import importlib.util
 import utils
 
 async def main(message: Message, *args):
-    compenents = utils.menuCompentents("extract", Variable.variableList())
+    compenents = utils.menuCompentents("📨 Extractors Category\nSelect From Menu Below...", Variable.variableList())
     await message.reply("Extractors", components=compenents)
 
 async def backButton() -> InlineKeyboardMarkup:
