@@ -1,14 +1,16 @@
 from dotenv import load_dotenv
+from Categories.Extract.Commands import tts
 from Variable import Variable
 from utils import menuCompentents
 from bale import Bot, CallbackQuery, Message
 from Categories.Toolbox.Commands import esmFamilCheat
-from Categories.AI.Commands import chatgpt_35,chatgpt_4o_mini,blackbox,tts
+from Categories.AI.Commands import chatgpt_35,chatgpt_4o_mini,blackbox
 from os import getenv
 import asyncio
 import Categories.Toolbox.toolbox as toolbox
 import Categories.AI.AI as ai
 import Categories.Downloader.downloader as downloader
+import Categories.Extract.extractors as extract
 
 load_dotenv()
 
@@ -17,12 +19,14 @@ client = Bot(getenv("TOKEN"))
 
 TOOLBOX = Variable("toolbox", "⚙️ ToolBox ⚙️", "main", toolbox.main)
 AI = Variable("ai", "🤖 AI 🤖", "main", ai.main)
+EXTRACTORS = Variable("extractors", "📨 Extractors", "main", extract.main)
 # DOWNLOADER = Variable("downloader", "📩 Downloaders", "main",downloader.main)
 # Constants
 WELCOME_TEXT = """Hi {name}, Welcome to Ario's test bot!"""
 
 toolbox.loadToolbox()
 ai.loadAI()
+extract.loadExtractors()
 # downloader.loadDownloader()
 
 
@@ -53,6 +57,9 @@ async def on_callback(callback: CallbackQuery):
         
     elif data == "back:ai":
         await ai.main(callback.message)
+        
+    elif data == "back:extract":
+        await extract.main(callback.message)
     
     if data.startswith("esmfamil:"):
         clean = data.removeprefix("esmfamil:")
@@ -79,7 +86,9 @@ async def on_callback(callback: CallbackQuery):
         elif clean == "blackbox":
             await blackbox.blackbox(callback.message)
             return await queryInput(callback.message, Variable.getObjectByName('blackbox').displayName)
-        elif clean == "tts":
+    if data.startswith("extract:"):
+        clean = data.removeprefix("extract:")
+        if clean == "tts":
             await tts.tts(callback.message)
             return await queryInput(callback.message, Variable.getObjectByName('tts').displayName)
 

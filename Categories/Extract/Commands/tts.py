@@ -1,12 +1,12 @@
 from bale import Message, InputFile, InlineKeyboardButton
-from Categories.AI.AI import AICommand, backButton
+from Categories.Extract.extractors import extractorCommand, backButton
 from codern import api
 import os
 import requests
 
 FILE_PATH = 'Assets/temp/audio.mp3'
 
-@AICommand("tts", "🗣️ Text-To-Speech", 2)
+@extractorCommand("tts", "🗣️ Text-To-Speech", 2)
 async def tts(message:Message, query:Message=False, *args):
     if not query:
         await message.reply("❓ Enter Text To Convert (Persian): ")
@@ -14,7 +14,7 @@ async def tts(message:Message, query:Message=False, *args):
     
     msg = await message.chat.send("🕹️ Generating...")
     back = await backButton()
-    buttons = back.add(InlineKeyboardButton("Reuse TTS", callback_data="ai:tts"))
+    buttons = back.add(InlineKeyboardButton("Reuse TTS", callback_data="extract:tts"))
     
     try:
         result:str = api.create_voice(query.content, "DilaraNeural")
