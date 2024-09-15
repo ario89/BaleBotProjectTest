@@ -12,7 +12,7 @@ async def audioExtractor(message: Message, query: Message = False):
         await message.reply("Send Video as *Document*: ")
         return "query"
     
-    if not query.document and query.video:
+    if query.video:
         return await message.reply("❌ Send Video as Document!")
     
     if not query.document:
