@@ -10,7 +10,7 @@ client = OpenAI(
     api_key=getenv("OPENAI_TOKEN"),
     base_url="https://api.chatanywhere.tech/v1"
 )
-@AICommand("chatgpt-4o-mini", "🤖 ChatGPT 4o-Mini", 1)
+@AICommand("chatgpt-4o-mini", "🤖 ChatGPT 4o-Mini", 2)
 async def ChatGPT4(message:Message, query:Message=False, *args):
     if not query:
         await message.reply("❓ What Do You Want Help With? ")
