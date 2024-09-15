@@ -17,7 +17,7 @@ async def tts(message:Message, query:Message=False, *args):
     buttons = back.add(InlineKeyboardButton("Reuse TTS", callback_data="extract:tts"))
     
     try:
-        result:str = api.create_voice(query.content, "DilaraNeural")
+        result:str = api.create_voice(query.content.replace("‌", " "), "FaridNeural")
         response = requests.get(result)
     
         with open(FILE_PATH, 'wb') as f:
