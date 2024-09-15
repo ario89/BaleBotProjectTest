@@ -56,7 +56,7 @@ async def toMorse(query:Message, *args):
             
     result = encrypt(query.content.upper())
     if not result: return await msg.edit("❌ Error", components=back)
-    return await msg.edit(f"✒️ Your Morse Code: *{result}*", components=back)
+    return await msg.edit(f"✒️ Your Morse Code:\n{'\n'.join(result)}", components=back)
 
 def decrypt(message):
     message = message.strip()
@@ -74,15 +74,14 @@ def decrypt(message):
 
     return decipher.strip()
 
-def encrypt(message):
-    cipher = ''
+def encrypt(message) -> list:
+    cipher = []
     try:
         for letter in message:
             if letter != ' ':
-                cipher += MORSE_CODE_DICT[letter] + ' '
+                cipher.append(f"{letter.upper()}: {MORSE_CODE_DICT[letter]}")
             else:
-
-                cipher += ' / '
+                cipher.append("")
         return cipher
     except:
         return False
