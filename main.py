@@ -25,6 +25,10 @@ toolbox.loadToolbox()
 ai.loadAI()
 downloader.loadDownloader()
 
+
+async def mainCommand(message:Message):
+    await message.reply(WELCOME_TEXT.format(name=message.author.first_name), components=menuCompentents("main", Variable.variableList()))
+
 @client.event
 async def on_ready():
     print(client.user.username, "is Online!")
@@ -34,8 +38,8 @@ async def on_message(message: Message):
     options_list = [var.displayName for var in Variable.variableList()]
     content = message.content
             
-    if content == "/start":
-        await message.reply(WELCOME_TEXT.format(name=message.author.first_name), components=menuCompentents("main", Variable.variableList()))
+    if content in ["/start", "🔙 Back To Main 🔙"]:
+        await mainCommand(message)      
         
     elif content in options_list:
         msg = await Variable.getObjectByDisplayName(content).execute(message)

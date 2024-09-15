@@ -6,6 +6,8 @@ def menuCompentents(category:str, varList) -> MenuKeyboardMarkup:
     for var in varList:
         if(var.category == category):
             markup.add(MenuKeyboardButton(var.displayName), row=var.row)
+            
+    if category != "main": markup.add(MenuKeyboardButton("🔙 Back To Main 🔙"), row=10000)
         
     return markup
 
