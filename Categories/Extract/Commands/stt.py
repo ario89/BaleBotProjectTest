@@ -4,7 +4,7 @@ from pydub import AudioSegment
 import speech_recognition as sr
 import os
 
-@extractorCommand("stt", "🦜 Extract Text from Voice", 3)
+@extractorCommand("stt", "🦜 Speech-To-Text", 3)
 async def stt(message: Message, query: Message = False, *args):
     if not query:
         await message.reply("Send Voice: ")
