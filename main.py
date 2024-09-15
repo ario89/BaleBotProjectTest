@@ -8,7 +8,7 @@ from os import getenv
 import asyncio
 import Categories.Toolbox.toolbox as toolbox
 import Categories.AI.AI as ai
-import Categories.downloader as downloader
+import Categories.Downloader.downloader as downloader
 
 load_dotenv()
 
@@ -23,6 +23,7 @@ WELCOME_TEXT = """Hi {name}, Welcome to Ario's test bot!"""
 
 toolbox.loadToolbox()
 ai.loadAI()
+downloader.loadDownloader()
 
 @client.event
 async def on_ready():
