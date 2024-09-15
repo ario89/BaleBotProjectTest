@@ -1,9 +1,11 @@
 from bale import Message, InlineKeyboardButton
 from Categories.AI.AI import AICommand, backButton
-from codern import api
+from openai import OpenAI
 
-ERORR_RESULT = """خروجی ناقص امکان وجود خطا در سرور !
-لطفا در دقایقی دیگر تلاش کنید"""
+client = OpenAI(
+    api_key="sk-tWIbT34A0TuzckeViv9aIYy2o0Dtr0qnjcUM8QTR5Ny1d4DK",
+    base_url="https://api.chatanywhere.tech/v1"
+)
 
 @AICommand("chatgpt", "🤖 ChatGPT", 0)
 async def ChatGPT(message:Message, query:Message=False, *args):
@@ -14,12 +16,11 @@ async def ChatGPT(message:Message, query:Message=False, *args):
     msg = await message.chat.send("🪄 Typing...")
     
     try:
-        result = api.Ai_chat_GPT(query.content)
-        if result == ERORR_RESULT:
-            raise Exception(result)
+        messages = [{'role': 'user','content': query.content},]
+        result = client.chat.completions.create(model="gpt-3.5-turbo", messages=messages)
         back = await backButton()
         buttons = back.add(InlineKeyboardButton("Reuse ChatGPT", callback_data="ai:chatgpt"))
-        await msg.edit(result, components=buttons)
+        await msg.edit(result.choices[0].message.content, components=buttons)
     except Exception as e:
         await msg.edit("❌ Error", components=await backButton())
         print(e)
