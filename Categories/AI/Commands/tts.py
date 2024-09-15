@@ -1,11 +1,12 @@
 from bale import Message, InputFile, InlineKeyboardButton
 from Categories.AI.AI import AICommand, backButton
 from codern import api
+import os
 import requests
 
-FILE_URL = 'Assets/temp/audio.mp3'
+FILE_PATH = 'Assets/temp/audio.mp3'
 
-@AICommand("tts", "🗣️ Text-To-Speach", 2)
+@AICommand("tts", "🗣️ Text-To-Speech", 2)
 async def tts(message:Message, query:Message=False, *args):
     if not query:
         await message.reply("❓ Enter Text To Convert (Persian): ")
@@ -19,18 +20,20 @@ async def tts(message:Message, query:Message=False, *args):
         result:str = api.create_voice(query.content, "DilaraNeural")
         response = requests.get(result)
     
-        with open(FILE_URL, 'wb') as f:
+        with open(FILE_PATH, 'wb') as f:
             f.write(response.content)
 
-        with open(FILE_URL, 'rb') as f:
-            audio_file = InputFile(f, file_name="Audio.mp3")
+        with open(FILE_PATH, 'rb') as f:
+            if os.path.getsize(FILE_PATH) > 0:
+                audio_file = InputFile(f, file_name="Audio.mp3")
+            else: return await msg.edit("❌ Invalid Input", components=buttons)
         
         await msg.edit("🌐 Uploading...")
         await query.reply_document(document=audio_file,caption="✅ Generated",components=buttons)
         return await msg.delete()
     except Exception as e:
-        await msg.edit("❌ Error", components=backButton())
+        await msg.edit("❌ Error", components=buttons)
         print(e)
         
-    with open(FILE_URL, 'w+') as f:
+    with open(FILE_PATH, 'w+') as f:
         f.write('')
