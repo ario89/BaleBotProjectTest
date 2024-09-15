@@ -3,7 +3,7 @@ from Variable import Variable
 from utils import menuCompentents
 from bale import Bot, CallbackQuery, Message
 from Categories.Toolbox.Commands import esmFamilCheat
-from Categories.AI.Commands import chatgpt,blackbox,tts
+from Categories.AI.Commands import chatgpt_35,chatgpt_4o_mini,blackbox,tts
 from os import getenv
 import asyncio
 import Categories.Toolbox.toolbox as toolbox
@@ -70,9 +70,12 @@ async def on_callback(callback: CallbackQuery):
         
     if data.startswith("ai:"):
         clean = data.removeprefix("ai:")
-        if clean == "chatgpt":
-            await chatgpt.ChatGPT(callback.message)
-            return await queryInput(callback.message, Variable.getObjectByName('chatgpt').displayName)
+        if clean == "chatgpt3.5":
+            await chatgpt_35.ChatGPT3(callback.message)
+            return await queryInput(callback.message, Variable.getObjectByName('chatgpt-3.5').displayName)
+        elif clean == "chatgpt4o":
+            await chatgpt_4o_mini.ChatGPT4(callback.message)
+            return await queryInput(callback.message, Variable.getObjectByName('chatgpt-4o-mini').displayName)
         elif clean == "blackbox":
             await blackbox.blackbox(callback.message)
             return await queryInput(callback.message, Variable.getObjectByName('blackbox').displayName)
