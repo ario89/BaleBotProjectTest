@@ -1,4 +1,4 @@
-from bale import Message, InputFile, InlineKeyboardButton
+from bale import Message
 from Categories.Extract.extractors import extractorCommand, backButton
 from utils import inlineComponents
 from PIL import Image
@@ -24,7 +24,7 @@ async def ocr(message:Message, query:Message=False, lang:str=False, *args):
         extracted_text = pytesseract.image_to_string(img, lang=lang)
 
         if extracted_text.strip():
-            return await msg.edit(extracted_text, components=await backButton())
+            return await msg.edit(f"🖼️ Extracted Text: {extracted_text}", components=await backButton())
         else:
             return await msg.edit("❌ Could not extract any text from the image", components=await backButton())
 
