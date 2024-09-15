@@ -17,13 +17,13 @@ client = Bot(getenv("TOKEN"))
 
 TOOLBOX = Variable("toolbox", "⚙️ ToolBox ⚙️", "main", toolbox.main)
 AI = Variable("ai", "🤖 AI 🤖", "main", ai.main)
-DOWNLOADER = Variable("downloader", "📩 Downloaders", "main",downloader.main)
+# DOWNLOADER = Variable("downloader", "📩 Downloaders", "main",downloader.main)
 # Constants
 WELCOME_TEXT = """Hi {name}, Welcome to Ario's test bot!"""
 
 toolbox.loadToolbox()
 ai.loadAI()
-downloader.loadDownloader()
+# downloader.loadDownloader()
 
 
 async def mainCommand(message:Message):
