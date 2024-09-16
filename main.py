@@ -11,6 +11,8 @@ import Categories.Toolbox.toolbox as toolbox
 import Categories.AI.AI as ai
 import Categories.Downloader.downloader as downloader
 import Categories.Extract.extractors as extract
+import Categories.account as account
+from database import Database
 
 load_dotenv()
 
@@ -20,6 +22,7 @@ client = Bot(getenv("TOKEN"))
 TOOLBOX = Variable("toolbox", "⚙️ ToolBox ⚙️", "main", toolbox.main, 1)
 AI = Variable("ai", "🤖 AI 🤖", "main", ai.main, 2)
 EXTRACTORS = Variable("extractors", "📨 Extractors", "main", extract.main, 2)
+ACCOUNT = Variable("account", "👤 User Account", "main", account.main, 2)
 # DOWNLOADER = Variable("downloader", "📩 Downloaders", "main",downloader.main)
 # Constants
 WELCOME_TEXT = """Hi {name}, Welcome to Ario's test bot!"""
@@ -29,6 +32,8 @@ ai.loadAI()
 extract.loadExtractors()
 # downloader.loadDownloader()
 
+db = Database("./Assets/data.db")
+db.createTable("userData", {"userID": "TEXT UNIQUE NOT NULL PRIMARY KEY", "firstName": "TEXT NOT NULL", "coins": "INTEGER NOT NULL DEFAULT 0"})
 
 async def mainCommand(message:Message):
     await message.reply(WELCOME_TEXT.format(name=message.author.first_name), components=menuCompentents("main", Variable.variableList()))
@@ -41,9 +46,19 @@ async def on_ready():
 async def on_message(message: Message):
     options_list = [var.displayName for var in Variable.variableList()]
     content = message.content
+    
+    if not db.getTableData("userData", f"userID='{message.author.id}'"):
+        db.writeTable("userData", {"userID": message.author.id, "firstName": message.author.first_name})
+        db.commitChanges()
             
     if content in ["/start", "🔙 Back To Main 🔙"]:
         await mainCommand(message)      
+    
+    if content == "/add10coins":
+        currentCoins = db.getTableData("userData", f"userID='{message.author.id}'")[0][2]
+        db.updateTable("userData", {"coins": currentCoins+10}, f"userID={message.author.id}")
+        db.commitChanges()
+        await message.reply("✅ Added")
         
     elif content in options_list:
         msg = await Variable.getObjectByDisplayName(content).execute(message)
@@ -117,3 +132,5 @@ async def queryInput(message:Message, content:str, *args):
 
 if __name__ == "__main__":
     client.run()
+    db.commitChanges()
+    db.close()
