@@ -2,7 +2,6 @@ import sqlite3
 
 class Database:
     def __init__(self, db_path:str) -> None:
-        
         self.instance = sqlite3.connect(db_path)
         self.path = db_path
     

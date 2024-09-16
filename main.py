@@ -33,7 +33,7 @@ extract.loadExtractors()
 # downloader.loadDownloader()
 
 db = Database("./Assets/data.db")
-db.createTable("userData", {"userID": "TEXT UNIQUE NOT NULL PRIMARY KEY", "firstName": "TEXT NOT NULL", "coins": "INTEGER NOT NULL DEFAULT 0"})
+db.createTable("userData", {"userID": "TEXT UNIQUE NOT NULL PRIMARY KEY", "firstName": "TEXT NOT NULL", "coins": "INTEGER NOT NULL DEFAULT 0", "isInChannels": "BIT NOT NULL DEFAULT 0"})
 
 async def mainCommand(message:Message):
     await message.reply(WELCOME_TEXT.format(name=message.author.first_name), components=menuCompentents("main", Variable.variableList()))
@@ -50,7 +50,7 @@ async def on_message(message: Message):
     if not db.getTableData("userData", f"userID='{message.author.id}'"):
         db.writeTable("userData", {"userID": message.author.id, "firstName": message.author.first_name})
         db.commitChanges()
-            
+    
     if content in ["/start", "🔙 Back To Main 🔙"]:
         await mainCommand(message)      
     
